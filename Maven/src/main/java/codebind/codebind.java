@@ -20,6 +20,6 @@ public class codebind {
 		ChromeDriver driver = new ChromeDriver();
 		
 		String Url = "www.youtube.com";
-		driver.get(Url);
+		driver.get(Url);;
 	}
 }
