@@ -9,7 +9,7 @@ public class codebind {
 
 	
 	@Test
-	public void test ()
+	public void test1 ()
 	{
 		//fail("passed");
 		int x =2;
