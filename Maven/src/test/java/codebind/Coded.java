@@ -16,10 +16,27 @@ public class Coded {
 		int y =3;
 		int z =x+y;
 		assertEquals(z,5);
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Nadeesh\\Downloads\\ChromeSetup.exe");
-		ChromeDriver driver = new ChromeDriver();
 		
-		String Url = "www.youtube.com";
-		driver.get(Url);
+	}
+	
+	@Test
+	public void test21 ()
+	{
+		//fail("passed");
+		int x =3;
+		int y =4;
+		int z =x+y;
+		assertEquals(z,7);
+		
+	}
+	@Test
+	public void test22 ()
+	{
+		//fail("passed");
+		int x =4;
+		int y =4;
+		int z =x+y;
+		assertEquals(z,8);
+		
 	}
 }
