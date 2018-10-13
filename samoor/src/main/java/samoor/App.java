@@ -15,7 +15,7 @@ public class App
    
     @Test
     
-    public static void main( String[] args )
+    public static void Test()
     {
     	int a =3;
     	int b =4;
