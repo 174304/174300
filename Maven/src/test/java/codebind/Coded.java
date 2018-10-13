@@ -33,7 +33,7 @@ public class Coded {
 	public void test22 ()
 	{
 		//fail("passed");
-		int x =4;
+		int x =4;;
 		int y =4;
 		int z =x+y;
 		assertEquals(z,8);
