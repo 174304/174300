@@ -11,10 +11,11 @@ pipeline{
     stage("build")
     {
        //def mvnHOME = tool name: 'Maven', type: 'maven'
+       steps{
         dir('/var/lib/jenkins/workspace/index-pipeline/product-webapps/product-webapps') {
         sh "mvn clean"
         sh "mvn install"
-        }}
+        }}}
     }
     stage("space")
     {
@@ -39,5 +40,6 @@ fi'''
         deploy adapters: [tomcat9(credentialsId: 'deployer', path: '', url: 'http://localhost:8080')], contextPath: 'product-webapps', onFailure: false, war: '**/*.war'
     }}
  }
+ 
 
 
