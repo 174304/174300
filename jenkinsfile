@@ -10,9 +10,7 @@ pipeline{
         }
     stage("build")
     {
-       steps{
-        def mvnHOME = tool name: 'Maven', type: 'maven'}
-       steps{
+       //def mvnHOME = tool name: 'Maven', type: 'maven'
         dir('/var/lib/jenkins/workspace/index-pipeline/product-webapps/product-webapps') {
         sh "mvn clean"
         sh "mvn install"
