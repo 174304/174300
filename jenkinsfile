@@ -1,13 +1,13 @@
 pipeline{
 
    agent none
-  stages{
-    stage('SCM')
+  stages {
+    stage("SCM")
         {
            checkout([$class: 'GitSCM', branches: [[name: '*/tomcat']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'product-webapps']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'Github', url: 'https://github.com/174304/174300.git']]])
            sh "pwd"
         }
-    stage('build')
+    stage("build")
     {
         def mvnHOME = tool name: 'Maven', type: 'maven'
         dir('/var/lib/jenkins/workspace/index-pipeline/product-webapps/product-webapps') {
@@ -15,13 +15,13 @@ pipeline{
         sh "mvn install"
         }
     }
-    stage('space')
+    stage("space")
     {
         dir('/usr/share/apache-tomcat-9.0.13/webapps') {
         //sh "rm product-webapps.war"
 }
     }
-    stage('deploy')
+    stage("deploy")
     {
     sh label: '', script: '''TOMCAT_PID=$(ps -ef | awk \'/[t]omcat/{print $2}\')
     echo TOMCAT PROCESSID $TOMCAT_PID
