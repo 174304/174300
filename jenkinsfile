@@ -1,6 +1,7 @@
 pipeline{
-stages{
+
    agent none
+  stages{
     stage('SCM')
         {
            checkout([$class: 'GitSCM', branches: [[name: '*/tomcat']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'product-webapps']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'Github', url: 'https://github.com/174304/174300.git']]])
