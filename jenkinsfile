@@ -1,4 +1,5 @@
 pipeline{
+stages{
    agent none
     stage('SCM')
         {
@@ -33,4 +34,6 @@ then
 fi'''
         deploy adapters: [tomcat9(credentialsId: 'deployer', path: '', url: 'http://localhost:8080')], contextPath: 'product-webapps', onFailure: false, war: '**/*.war'
     }
+ }
 }
+
