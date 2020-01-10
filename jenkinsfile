@@ -1,33 +1,34 @@
 pipeline{
-
-   agent none
-  stages {
-    stage("SCM")
-        {
-         steps{
-           checkout([$class: 'GitSCM', branches: [[name: '*/tomcat']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'product-webapps']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'Github', url: 'https://github.com/174304/174300.git']]])
-           }
-        }
-    stage("build")
-    {
-       //def mvnHOME = tool name: 'Maven', type: 'maven'
-       steps{
-        dir('/var/lib/jenkins/workspace/index-pipeline/product-webapps/product-webapps') {
-        sh "mvn clean"
-        sh "mvn install"
-        }}}
-    }
-    stage("space")
-    {
-     steps{
-        dir('/usr/share/apache-tomcat-9.0.13/webapps') {
+	   agent none
+		  stages {
+    			stage("SCM")
+        			{
+         			steps{
+           				checkout([$class: 'GitSCM', branches: [[name: '*/tomcat']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'product-webapps']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'Github', url: 'https://github.com/174304/174300.git']]])
+           				}
+        			}
+    			stage("build")
+    				{				
+      				 //def mvnHOME = tool name: 'Maven', type: 'maven'
+       					steps{
+        					dir('/var/lib/jenkins/workspace/index-pipeline/product-webapps/product-webapps') {
+        						sh "mvn clean"
+        						sh "mvn install"
+        					   }
+					      }
+				}
+    			stage("space")
+    				{
+     					steps{
+        					dir('/usr/share/apache-tomcat-9.0.13/webapps') {
         //sh "rm product-webapps.war"
-}}
-    }
-    stage("deploy")
-    {
-     steps{
-    sh label: '', script: '''TOMCAT_PID=$(ps -ef | awk \'/[t]omcat/{print $2}\')
+		}
+						}
+    				}
+    			stage("deploy")
+    				{
+     					steps{
+    						sh label: '', script: '''TOMCAT_PID=$(ps -ef | awk \'/[t]omcat/{print $2}\')
     echo TOMCAT PROCESSID $TOMCAT_PID
 
 if [ -z "$TOMCAT_PID" ]
@@ -38,8 +39,8 @@ then
    echo "TOMCAT RUNNING"
 fi'''
         deploy adapters: [tomcat9(credentialsId: 'deployer', path: '', url: 'http://localhost:8080')], contextPath: 'product-webapps', onFailure: false, war: '**/*.war'
-    }}
- }
- 
+   						 }
+					}
+				}
 
-
+		}
