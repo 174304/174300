@@ -28,7 +28,7 @@ pipeline{
     			stage("deploy")
     				{
      					steps{
-    						sh label: '', script: '''TOMCAT_PID=$(ps -ef | awk \'/[t]omcat/{print $2}\')
+    						sh label: '', script: '''TOMCAT_PID=$(ps -ef | awk '/[t]omcat/{print $2}')
     echo TOMCAT PROCESSID $TOMCAT_PID
 
 if [ -z "$TOMCAT_PID" ]
