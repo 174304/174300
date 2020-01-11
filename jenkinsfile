@@ -35,11 +35,10 @@ if [ -z "$TOMCAT_PID" ]
 then
     echo "TOMCAT NOT RUNNING"
     sh "/usr/share/apache-tomcat-9.0.13/bin/startup.sh"
-    //sleep(time:3,unit:"SECONDS")
     else
    echo "TOMCAT RUNNING"
 fi'''
-        //deploy adapters: [tomcat9(credentialsId: 'deployer', path: '', url: 'http://localhost:8080')], contextPath: 'product-webapps', onFailure: false, war: '**/*.war'
+        deploy adapters: [tomcat9(credentialsId: 'deployer', path: '', url: 'http://localhost:8080')], contextPath: 'product-webapps', onFailure: false, war: '**/*.war'
    						 }
 					}
 				}
