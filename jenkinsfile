@@ -28,15 +28,18 @@ pipeline{
     			stage("deploy")
     				{
      					steps{
+					dir('/usr/share/apache-tomcat-9.0.13/bin') {
+    sh './shutdown.sh'
+    sh './startup.sh'
+    }
+    
+					
     						sh label: '', script: '''TOMCAT_PID=$(ps -ef | awk '/[t]omcat/{print $2}')
    
 
 if [ -z "$TOMCAT_PID" ]
 then
     echo "TOMCAT NOT RUNNING"
-   dir('/usr/share/apache-tomcat-9.0.13/bin') {
-    sh './startup.sh'
-    }
     else
    echo "$TOMCAT_PID"
 fi'''
