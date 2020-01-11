@@ -34,7 +34,7 @@ pipeline{
 if [ -z "$TOMCAT_PID" ]
 then
     echo "TOMCAT NOT RUNNING"
-    sh label: '', returnStatus: true, script: '/usr/share/apache-tomcat-9.0.13/bin/startup.sh'
+    sh label: '', returnStatus: true, script: 'sudo /usr/share/apache-tomcat-9.0.13/bin/startup.sh'
     else
    echo "TOMCAT RUNNING"
 fi'''
