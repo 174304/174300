@@ -29,7 +29,7 @@ pipeline{
     				{
      					steps{
     						sh label: '', script: '''TOMCAT_PID=$(ps -ef | awk '/[t]omcat/{print $2}')
-    echo TOMCAT PROCESSID $TOMCAT_PID
+   
 
 if [ -z "$TOMCAT_PID" ]
 then
@@ -38,7 +38,7 @@ then
     sh 'pwd'
     }
     else
-   echo "TOMCAT RUNNING"
+   echo "$TOMCAT_PID"
 fi'''
         deploy adapters: [tomcat9(credentialsId: 'deployer', path: '', url: 'http://localhost:8080')], contextPath: 'product-webapps', onFailure: false, war: '**/*.war'
    						 }
